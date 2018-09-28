@@ -1,0 +1,120 @@
+CREATE DATABASE Music DEFAULT CHARACTER SET utf8;
+
+USE Music;  
+
+CREATE TABLE Artist (
+  artist_id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255),
+  PRIMARY KEY(artist_id)
+) ENGINE = InnoDB;
+
+CREATE TABLE Album (
+  album_id INTEGER NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255),
+  artist_id INTEGER,
+
+  PRIMARY KEY(album_id),
+  INDEX USING BTREE (title),
+
+  CONSTRAINT FOREIGN KEY (artist_id)
+    REFERENCES Artist (artist_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+CREATE TABLE Genre (
+  genre_id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255),
+  PRIMARY KEY(genre_id)
+) ENGINE = InnoDB;
+
+CREATE TABLE Track (
+  track_id INTEGER NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255),
+  len INTEGER,
+  rating INTEGER,
+  count INTEGER,
+  album_id INTEGER,
+  genre_id INTEGER,
+
+  PRIMARY KEY(track_id),
+  INDEX USING BTREE (title),
+
+  CONSTRAINT FOREIGN KEY (album_id) REFERENCES Album (album_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FOREIGN KEY (genre_id) REFERENCES Genre (genre_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+
+INSERT INTO Artist (name) VALUES ('Arijit Singh');
+INSERT INTO Artist (name) VALUES ('Sonu nigham');
+INSERT INTO Artist (name) VALUES ('Shreya Ghoshal');
+
+INSERT INTO Genre (name) VALUES ('Melody');
+INSERT INTO Genre (name) VALUES ('Romantic');
+INSERT INTO Genre (name) VALUES ('Classical');
+INSERT INTO Genre (name) VALUES ('Devotional');
+INSERT INTO Genre (name) VALUES ('Folk Music');
+INSERT INTO Genre (name) VALUES ('Bollywood Music');
+
+
+
+INSERT INTO Album (title, artist_id) VALUES ('Aey dil hey mushkil', 1);
+INSERT INTO Album (title, artist_id) VALUES ('Ranjhana', 2);
+INSERT INTO Album (title, artist_id) VALUES ('Sanam Re', 3);
+INSERT INTO Album (title, artist_id) VALUES ('Dangal', 1);
+INSERT INTO Album (title, artist_id) VALUES ('Ashiqui2', 2);
+
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Tum hi ho', 5, 297, 0, 4, 1);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Sanam re', 5, 482, 0, 5, 1);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Phir bhi Tumko chahunga', 5, 313, 0, 1, 2);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Agar tum sath ho', 5, 207, 0, 3, 3);
+
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Saawan aaya hey', 5, 297, 0, 3, 4);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Lo Maan Liya', 5, 482, 0, 5, 4);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Kabhi jo baadal', 5, 313, 0, 3, 2);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Janam Janam ', 5, 207, 0, 4, 1);
+
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Bole chudia', 5, 297, 0, 4, 3);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Hans math pagli', 5, 482, 0, 3, 4);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Kal ho na ho', 5, 313, 0, 2, 4);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('maa sherwaliye', 5, 207, 0, 3, 5);
+
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Akhiyon se goli maare', 5, 297, 0, 5, 5);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('main agar kahoon', 5, 482, 0, 1, 4);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('suraj hua maddham', 5, 313, 0, 1, 3);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Ram Jaane', 5, 207, 0, 3, 2);
+
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('tere liey', 5, 297, 0, 2, 4);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Ghoomar', 5, 482, 0, 5, 5);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Ek do teen ', 5, 313, 0, 4, 3);
+INSERT INTO Track (title, rating, len, count, album_id, genre_id)
+    VALUES ('Nagada sang dhol bhaaje', 5, 207, 0, 4, 4);
+
+
+
+
